@@ -23,11 +23,13 @@ export function ResultScreen({ diagnosis, onCta }: ResultScreenProps) {
         className="relative w-24 h-24 mb-6"
       >
         <div className="absolute inset-0 rounded-full animate-pulse-glow" style={{ background: 'radial-gradient(circle, rgba(47,155,255,0.4), transparent 70%)' }} />
-        <ScannerFrame active className="absolute inset-2 rounded-2xl flex items-center justify-center">
-          <div className="w-full h-full rounded-2xl glass flex items-center justify-center">
-            <Icon name="check" className="w-8 h-8 text-blue-glow" strokeWidth={1.6} />
-          </div>
-        </ScannerFrame>
+        <div className="absolute inset-2">
+          <ScannerFrame active className="w-full h-full rounded-2xl flex items-center justify-center">
+            <div className="w-full h-full rounded-2xl glass flex items-center justify-center">
+              <Icon name="check" className="w-8 h-8 text-blue-glow" strokeWidth={1.6} />
+            </div>
+          </ScannerFrame>
+        </div>
       </motion.div>
 
       <motion.div

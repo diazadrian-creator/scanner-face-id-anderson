@@ -38,11 +38,13 @@ export function Hero({ onStart }: HeroProps) {
           <div className="absolute inset-0 rounded-full animate-pulse-glow" style={{ background: 'radial-gradient(circle, rgba(47,155,255,0.35), transparent 70%)' }} />
           <div className="absolute inset-3 rounded-full border border-blue/30" />
           <div className="absolute inset-7 rounded-full border border-blue-glow/40" />
-          <ScannerFrame active className="absolute inset-10 rounded-2xl flex items-center justify-center">
-            <div className="w-full h-full rounded-2xl glass flex items-center justify-center">
-              <Icon name="smartphone" className="w-9 h-9 text-blue-glow" strokeWidth={1.4} />
-            </div>
-          </ScannerFrame>
+          <div className="absolute inset-10">
+            <ScannerFrame active className="w-full h-full rounded-2xl flex items-center justify-center">
+              <div className="w-full h-full rounded-2xl glass flex items-center justify-center">
+                <Icon name="smartphone" className="w-9 h-9 text-blue-glow" strokeWidth={1.4} />
+              </div>
+            </ScannerFrame>
+          </div>
         </motion.div>
 
         <motion.h1
