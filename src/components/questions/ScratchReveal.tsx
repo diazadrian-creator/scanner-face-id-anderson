@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import { Icon } from '../Icon'
 import { ContinueBar } from './ContinueBar'
+import { playRewardSound, startScratchSound, stopScratchSound } from '../../utils/sound'
 import type { QuizStep } from '../../types'
 
 interface ScratchRevealProps {
@@ -60,7 +61,10 @@ export function ScratchReveal({ step, onContinue }: ScratchRevealProps) {
 
     paintOverlay()
     window.addEventListener('resize', paintOverlay)
-    return () => window.removeEventListener('resize', paintOverlay)
+    return () => {
+      window.removeEventListener('resize', paintOverlay)
+      stopScratchSound()
+    }
   }, [])
 
   function scratchAt(clientX: number, clientY: number) {
@@ -95,11 +99,14 @@ export function ScratchReveal({ step, onContinue }: ScratchRevealProps) {
     }
     if (total > 0 && cleared / total > REVEAL_THRESHOLD) {
       setRevealed(true)
+      stopScratchSound()
+      playRewardSound()
     }
   }
 
   function handlePointerDown(e: React.PointerEvent) {
     scratching.current = true
+    startScratchSound()
     scratchAt(e.clientX, e.clientY)
   }
   function handlePointerMove(e: React.PointerEvent) {
@@ -108,6 +115,7 @@ export function ScratchReveal({ step, onContinue }: ScratchRevealProps) {
   }
   function handlePointerUp() {
     scratching.current = false
+    stopScratchSound()
   }
 
   return (

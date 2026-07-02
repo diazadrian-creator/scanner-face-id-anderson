@@ -8,6 +8,7 @@ import { ScaleQuestion } from './questions/ScaleQuestion'
 import { ScratchReveal } from './questions/ScratchReveal'
 import { LoadingDiagnosis } from './questions/LoadingDiagnosis'
 import { TOTAL_STEPS } from '../data/quizSteps'
+import { playRewardSound } from '../utils/sound'
 import type { Route, QuizAnswerValue } from '../types'
 
 interface QuizFlowProps {
@@ -21,16 +22,19 @@ export function QuizFlow({ onFinished }: QuizFlowProps) {
   if (!currentStep) return null
 
   function handleSingleAnswer(value: string) {
+    playRewardSound()
     answer(currentStep.id, value)
     setTimeout(goNext, 380)
   }
 
   function handleScaleAnswer(value: number) {
+    playRewardSound()
     answer(currentStep.id, value)
     setTimeout(goNext, 380)
   }
 
   function handleToggle(optionId: string) {
+    playRewardSound()
     toggleMultiple(currentStep.id, optionId, currentStep.multipleMax ?? currentStep.options?.length ?? 99)
   }
 

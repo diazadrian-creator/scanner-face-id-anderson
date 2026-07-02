@@ -8,6 +8,7 @@ import { OfferSection } from './components/OfferSection'
 import { FAQSection } from './components/FAQSection'
 import { Footer } from './components/Footer'
 import { calculateDiagnosis } from './utils/diagnosis'
+import { playRewardSound } from './utils/sound'
 import type { Diagnosis, QuizAnswerValue, Route } from './types'
 
 type Screen = 'hero' | 'preframe' | 'quiz' | 'result'
@@ -22,6 +23,7 @@ function App() {
   function handleQuizFinished(route: Route | null, answers: QuizAnswerValue) {
     setDiagnosis(calculateDiagnosis(route, answers))
     setScreen('result')
+    playRewardSound()
     window.scrollTo({ top: 0 })
   }
 

@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 import { branchStep, getRouteSteps, loadingStep, TOTAL_STEPS } from '../data/quizSteps'
 import { levelForXp, xpForStep } from '../utils/diagnosis'
+import { playRewardSound } from '../utils/sound'
 import type { QuizAnswerValue, Route } from '../types'
 
 export function useQuizState() {
@@ -39,6 +40,7 @@ export function useQuizState() {
   }
 
   function goNext() {
+    playRewardSound()
     setXp((v) => v + xpForStep())
     setCurrentIndex((i) => Math.min(i + 1, TOTAL_STEPS - 1))
   }
