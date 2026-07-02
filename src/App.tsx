@@ -3,6 +3,7 @@ import { Hero } from './components/Hero'
 import { PreFrame } from './components/PreFrame'
 import { QuizFlow } from './components/QuizFlow'
 import { ResultScreen } from './components/ResultScreen'
+import { DiagnosisUnlockModal } from './components/DiagnosisUnlockModal'
 import { VSLSection } from './components/VSLSection'
 import { OfferSection } from './components/OfferSection'
 import { FAQSection } from './components/FAQSection'
@@ -17,18 +18,25 @@ function App() {
   const [screen, setScreen] = useState<Screen>('hero')
   const [diagnosis, setDiagnosis] = useState<Diagnosis | null>(null)
   const [offerUnlocked, setOfferUnlocked] = useState(false)
+  const [showDiagnosisModal, setShowDiagnosisModal] = useState(false)
   const vslRef = useRef<HTMLDivElement>(null)
   const offerRef = useRef<HTMLDivElement>(null)
 
   function handleQuizFinished(route: Route | null, answers: QuizAnswerValue) {
     setDiagnosis(calculateDiagnosis(route, answers))
     setScreen('result')
-    playRewardSound()
+    setShowDiagnosisModal(true)
     window.scrollTo({ top: 0 })
   }
 
   function scrollToVsl() {
     vslRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
+
+  function handleWatchExplanation() {
+    playRewardSound()
+    setShowDiagnosisModal(false)
+    setTimeout(scrollToVsl, 150)
   }
 
   function handleUnlockOffer() {
@@ -52,6 +60,11 @@ function App() {
     return (
       <div>
         <ResultScreen diagnosis={diagnosis} onCta={scrollToVsl} />
+        <DiagnosisUnlockModal
+          open={showDiagnosisModal}
+          onWatchExplanation={handleWatchExplanation}
+          onDismiss={() => setShowDiagnosisModal(false)}
+        />
         <div ref={vslRef}>
           <VSLSection diagnosis={diagnosis} unlocked={offerUnlocked} onUnlock={handleUnlockOffer} />
         </div>
