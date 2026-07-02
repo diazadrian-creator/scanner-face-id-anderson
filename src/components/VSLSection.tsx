@@ -109,7 +109,7 @@ export function VSLSection({ diagnosis, unlocked, onUnlock }: VSLSectionProps) {
           {!unlocked && (
             <>
               <p className="text-xs sm:text-sm text-mist max-w-sm mx-auto">
-                Sua solução personalizada será liberada após assistir a explicação.
+                Seu plano personalizado será liberado após assistir a explicação completa.
               </p>
               <button
                 onClick={onUnlock}
@@ -117,7 +117,7 @@ export function VSLSection({ diagnosis, unlocked, onUnlock }: VSLSectionProps) {
                 className="btn-glow mt-5 inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-blue-deep to-blue px-8 py-4 font-display font-semibold text-sm tracking-wide text-frost active:scale-95 transition-transform disabled:opacity-30 disabled:shadow-none"
               >
                 <Icon name={watched ? 'unlock' : 'lock'} className="w-4.5 h-4.5" />
-                LIBERAR OFERTA
+                DESBLOQUEAR MEU PLANO PERSONALIZADO
               </button>
             </>
           )}
